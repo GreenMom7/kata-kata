@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Sparkles, Trash2 } from "lucide-react";
+import { Sparkles, Trash2, Pencil } from "lucide-react";
 import { generateSentences } from "../lib/ai.js";
 
-export default function WordCard({ entry, t, onDelete, onUpdate }) {
+export default function WordCard({ entry, t, onDelete, onUpdate, onEdit }) {
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
@@ -56,13 +56,22 @@ export default function WordCard({ entry, t, onDelete, onUpdate }) {
             {entry.meaning}
           </p>
         </div>
-        <button
-          onClick={() => onDelete(entry.id)}
-          aria-label={`Delete ${entry.word}`}
-          style={t.ghostIcon}
-        >
-          <Trash2 size={16} />
-        </button>
+        <div style={{ display: "flex", gap: 4, flexShrink: 0 }}>
+          <button
+            onClick={() => onEdit(entry)}
+            aria-label={`Edit ${entry.word}`}
+            style={t.ghostIcon}
+          >
+            <Pencil size={16} />
+          </button>
+          <button
+            onClick={() => onDelete(entry.id)}
+            aria-label={`Delete ${entry.word}`}
+            style={t.ghostIcon}
+          >
+            <Trash2 size={16} />
+          </button>
+        </div>
       </div>
 
       {entry.sentences.length > 0 && (

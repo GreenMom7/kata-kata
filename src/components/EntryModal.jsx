@@ -1,13 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import { X } from "lucide-react";
 
-// AddModal — capture a new word/phrase.
+// EntryModal — capture a new word/phrase, or edit an existing one.
+// Pass `initial` (an existing entry) to edit; omit it to add a new word.
 // Categories are entirely user-driven: there's no preset list. The user types
 // whatever they want, and previously-used categories appear as quick-pick chips.
-export default function AddModal({ t, existingCategories, onClose, onSave }) {
-  const [word, setWord] = useState("");
-  const [meaning, setMeaning] = useState("");
-  const [category, setCategory] = useState("");
+export default function EntryModal({ t, initial, existingCategories, onClose, onSave }) {
+  const isEdit = Boolean(initial);
+  const [word, setWord] = useState(initial?.word ?? "");
+  const [meaning, setMeaning] = useState(initial?.meaning ?? "");
+  const [category, setCategory] = useState(initial?.category ?? "");
   const wordRef = useRef();
 
   useEffect(() => {
@@ -28,7 +30,6 @@ export default function AddModal({ t, existingCategories, onClose, onSave }) {
       meaning: meaning.trim(),
       // Category is optional — empty string means "uncategorised".
       category: category.trim(),
-      sentences: [],
     });
     onClose();
   };
@@ -40,7 +41,7 @@ export default function AddModal({ t, existingCategories, onClose, onSave }) {
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
-        aria-label="Add a new word"
+        aria-label={isEdit ? "Edit word" : "Add a new word"}
       >
         <div
           style={{
@@ -50,7 +51,9 @@ export default function AddModal({ t, existingCategories, onClose, onSave }) {
             marginBottom: 24,
           }}
         >
-          <h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: t.ink }}>New word</h2>
+          <h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: t.ink }}>
+            {isEdit ? "Edit word" : "New word"}
+          </h2>
           <button onClick={onClose} style={t.ghostIcon} aria-label="Close">
             <X size={18} />
           </button>
@@ -77,7 +80,7 @@ export default function AddModal({ t, existingCategories, onClose, onSave }) {
           onChange={(e) => setMeaning(e.target.value)}
           rows={3}
           style={{ ...t.input, resize: "vertical" }}
-          placeholder="what does it mean?"
+          placeholder="what does it mean? (press Enter for a new line)"
         />
 
         <label style={t.label} htmlFor="kk-category">
@@ -121,7 +124,7 @@ export default function AddModal({ t, existingCategories, onClose, onSave }) {
             cursor: !word.trim() || !meaning.trim() ? "not-allowed" : "pointer",
           }}
         >
-          Save word
+          {isEdit ? "Save changes" : "Save word"}
         </button>
       </div>
     </div>

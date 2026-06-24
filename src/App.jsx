@@ -4,7 +4,7 @@ import { Plus, List, Layers } from "lucide-react";
 import Navbar from "./components/Navbar.jsx";
 import WordCard from "./components/WordCard.jsx";
 import FlashcardDeck from "./components/FlashcardDeck.jsx";
-import AddModal from "./components/AddModal.jsx";
+import EntryModal from "./components/EntryModal.jsx";
 import EmptyState from "./components/EmptyState.jsx";
 
 import { getTheme } from "./lib/theme.js";
@@ -15,6 +15,7 @@ export default function App() {
   const [entries, setEntries] = useState(loadEntries);
   const [view, setView] = useState("list"); // "list" | "cards"
   const [adding, setAdding] = useState(false);
+  const [editing, setEditing] = useState(null); // the entry being edited, or null
   const [filter, setFilter] = useState("all");
 
   const t = getTheme(dark);
@@ -118,6 +119,7 @@ export default function App() {
                 t={t}
                 onDelete={deleteEntry}
                 onUpdate={updateEntry}
+                onEdit={setEditing}
               />
             ))}
           </div>
@@ -126,12 +128,18 @@ export default function App() {
         )}
       </main>
 
-      {adding && (
-        <AddModal
+      {(adding || editing) && (
+        <EntryModal
           t={t}
+          initial={editing}
           existingCategories={categories}
-          onClose={() => setAdding(false)}
-          onSave={addEntry}
+          onClose={() => {
+            setAdding(false);
+            setEditing(null);
+          }}
+          onSave={(vals) =>
+            editing ? updateEntry(editing.id, vals) : addEntry({ ...vals, sentences: [] })
+          }
         />
       )}
     </div>

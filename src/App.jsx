@@ -6,6 +6,7 @@ import WordCard from "./components/WordCard.jsx";
 import FlashcardDeck from "./components/FlashcardDeck.jsx";
 import EntryModal from "./components/EntryModal.jsx";
 import EmptyState from "./components/EmptyState.jsx";
+import Footer from "./components/Footer.jsx";
 
 import { getTheme } from "./lib/theme.js";
 import { loadEntries, saveEntries, loadTheme, saveTheme } from "./lib/storage.js";
@@ -127,6 +128,8 @@ export default function App() {
           <FlashcardDeck entries={filtered} t={t} />
         )}
       </main>
+
+      <Footer t={t} />
 
       {(adding || editing) && (
         <EntryModal

@@ -44,7 +44,15 @@ export default function WordCard({ entry, t, onDelete, onUpdate }) {
             </h3>
             {entry.category && <span style={t.tag}>{entry.category}</span>}
           </div>
-          <p style={{ margin: "10px 0 0", fontSize: 15, lineHeight: 1.6, color: t.body }}>
+          <p
+            style={{
+              margin: "10px 0 0",
+              fontSize: 15,
+              lineHeight: 1.6,
+              color: t.body,
+              whiteSpace: "pre-wrap",
+            }}
+          >
             {entry.meaning}
           </p>
         </div>

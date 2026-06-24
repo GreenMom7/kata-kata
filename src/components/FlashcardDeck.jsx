@@ -92,6 +92,7 @@ export default function FlashcardDeck({ entries, t }) {
                 lineHeight: 1.6,
                 color: t.body,
                 textAlign: "center",
+                whiteSpace: "pre-wrap",
               }}
             >
               {e.meaning}

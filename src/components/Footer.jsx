@@ -67,7 +67,7 @@ export default function Footer({ t }) {
         }}
       >
         <span style={{ fontSize: 13, color: t.muted }}>
-          © {new Date().getFullYear()} kata-kata
+          © {new Date().getFullYear()} Muhammad Akmal
         </span>
         <div style={{ display: "flex", gap: 10 }}>
           {LINKS.map((link) => (

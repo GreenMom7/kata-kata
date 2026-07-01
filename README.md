@@ -5,6 +5,8 @@ growing vocab book, with AI-generated example sentences and flashcards for memor
 
 > _kata-kata_ means "words" in Malay/Indonesian.
 
+Now accesible from your browser : [kata-kata](https://akmal-kata-kata.netlify.app/)
+
 ## Features
 
 - **Add words & phrases** with a meaning and an optional, free-form category.

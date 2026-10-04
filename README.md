@@ -1,6 +1,6 @@
 # kata-kata
 
-A minimalist personal dictionary for words and phrases you're learning — your own
+A minimalist personal dictionary for words and phrases you're learning acting as your own
 growing vocab book, with AI-generated example sentences and flashcards for memorising.
 
 > _kata-kata_ means "words" in Malay/Indonesian.
